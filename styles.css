@@ -1,0 +1,71 @@
+/* VOICE: juguetón, de calle, para jugar en pareja o con amigos
+   IDEA: un cartón de bingo de papel que llevas en la mano mientras paseas
+   COLOUR and TYPE: rojo tomate de fondo, papel blanco, sello cobalto, amarillo para líneas; Bungee (rótulos) + Nunito */
+:root{color-scheme:light dark;
+--bg:light-dark(#e8432e,#2a0f0b);--bg2:light-dark(#c8321f,#1d0907);
+--paper:light-dark(#fffdf8,#f3ede2);--ink:#1f1a17;--on:#fff;
+--blue:#2546d8;--yellow:#ffd23f;--muted:#6f625a;--line:#e4d9cb}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--on);font:16px/1.5 Nunito,system-ui,sans-serif;overflow-x:clip;
+ padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+button,input,textarea{font:inherit}
+header{padding:22px max(5vw,16px) 0;text-align:center;position:relative}
+h1{font:400 clamp(34px,9vw,52px)/1.05 Bungee,Impact,sans-serif;margin:0;letter-spacing:.5px;text-wrap:balance;text-shadow:0 3px 0 var(--bg2)}
+.sub{margin:6px auto 0;max-width:34ch;font-weight:700;opacity:.92}
+.sky{display:block;width:100%;height:56px;margin-top:14px}
+main{max-width:620px;margin:0 auto;padding:16px max(4vw,12px) 40px}
+.bar{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center;margin-bottom:14px}
+.seg{display:flex;background:var(--bg2);border-radius:999px;padding:4px}
+.seg button{border:0;background:none;color:var(--on);font-weight:800;min-height:40px;padding:0 14px;border-radius:999px;cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--yellow);color:var(--ink)}
+.btn{border:0;min-height:44px;padding:0 18px;border-radius:999px;font-weight:900;cursor:pointer;background:var(--paper);color:var(--ink);box-shadow:0 3px 0 var(--bg2)}
+.btn.y{background:var(--yellow)}
+.btn:active{transform:translateY(2px);box-shadow:0 1px 0 var(--bg2)}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+.ticket{background:var(--paper);color:var(--ink);border-radius:18px;padding:14px;position:relative;box-shadow:0 10px 0 var(--bg2),0 18px 30px rgba(0,0,0,.25)}
+.ticket::before,.ticket::after{content:"";position:absolute;top:50%;width:22px;height:22px;border-radius:50%;background:var(--bg);transform:translateY(-50%)}
+.ticket::before{left:-11px}.ticket::after{right:-11px}
+.thead{display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding:0 4px 10px;border-bottom:2px dashed var(--line);margin-bottom:12px}
+.thead b{font:400 18px/1 Bungee,sans-serif;color:var(--bg2)}
+.thead span{font-weight:800;color:var(--muted);font-size:14px;white-space:nowrap}
+.grid{display:grid;gap:6px}
+.cell{position:relative;aspect-ratio:1;border:2px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);padding:5px 4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;text-align:center;cursor:pointer;font-weight:800;font-size:14px;line-height:1.12;hyphens:auto;overflow:hidden;-webkit-tap-highlight-color:transparent}
+.g5 .cell{font-size:13px;padding:3px 2px;border-radius:8px}.g3 .cell{font-size:16px}
+.cell svg.ic{width:24px;height:24px;flex:none;color:var(--c)}
+.g5 .cell svg.ic{width:17px;height:17px}.g3 .cell svg.ic{width:34px;height:34px}
+.cell .t{overflow-wrap:anywhere}
+.cell .stamp{position:absolute;inset:8%;border-radius:50%;background:radial-gradient(circle at 38% 35%,rgba(37,70,216,.55),rgba(37,70,216,.78));mix-blend-mode:multiply;transform:scale(0) rotate(-20deg);transition:transform .22s cubic-bezier(.3,1.6,.5,1);pointer-events:none}
+.cell.on .stamp{transform:scale(1) rotate(0)}
+.cell.on{border-color:var(--blue)}
+.cell.win{background:#fff4c2;border-color:#e0b100}
+.cell.free{background:var(--yellow);border-color:#e0b100;cursor:default}
+.cell.free .t{font:400 15px Bungee,sans-serif}
+.score{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:22px}
+.score div{background:var(--bg2);border-radius:14px;padding:10px 6px;text-align:center}
+.score b{display:block;font:400 clamp(22px,6vw,30px)/1.1 Bungee,sans-serif;color:var(--yellow)}
+.score span{font-size:13px;font-weight:700;opacity:.9}
+.meter{height:10px;background:var(--bg2);border-radius:99px;margin-top:10px;overflow:hidden}
+.meter i{display:block;height:100%;width:0;background:var(--yellow);border-radius:99px;transition:width .3s}
+.panel{background:var(--paper);color:var(--ink);border-radius:16px;padding:16px;margin-top:18px}
+.panel h2{font:400 19px/1.2 Bungee,sans-serif;margin:0 0 8px;color:var(--bg2)}
+.panel p{margin:0 0 10px;color:#4a3f38}
+.code{font:400 30px/1 Bungee,sans-serif;letter-spacing:3px;color:var(--blue);margin:4px 0 10px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.row input{flex:1 1 130px;min-height:44px;font-size:16px;border:2px solid var(--line);border-radius:12px;padding:0 12px;text-transform:uppercase;background:#fff;color:var(--ink)}
+.panel .btn{box-shadow:none;background:var(--blue);color:#fff}
+.panel .btn.ghost{background:#efe7dc;color:var(--ink)}
+textarea{width:100%;min-height:110px;font-size:16px;border:2px solid var(--line);border-radius:12px;padding:10px;background:#fff;color:var(--ink);resize:vertical}
+label.chk{display:flex;gap:10px;align-items:center;font-weight:800;margin:10px 0;min-height:44px}
+label.chk input{width:22px;height:22px;accent-color:var(--blue)}
+.msg{font-weight:800;color:var(--blue);min-height:1.5em;margin:6px 0 0}
+ol{margin:0;padding-inline-start:20px;color:#4a3f38}ol li{margin:4px 0}
+.toast{position:fixed;left:50%;top:calc(18px + env(safe-area-inset-top));transform:translate(-50%,-160%);background:var(--yellow);color:var(--ink);font:400 22px Bungee,sans-serif;padding:12px 22px;border-radius:999px;box-shadow:0 6px 0 rgba(0,0,0,.2);transition:transform .35s cubic-bezier(.3,1.5,.5,1);z-index:20;white-space:nowrap}
+.toast.show{transform:translate(-50%,0)}
+.win-ov{position:fixed;inset:0;background:rgba(20,6,4,.72);display:none;place-items:center;z-index:30;padding:20px}
+.win-ov.show{display:grid}
+.win-card{background:var(--yellow);color:var(--ink);border-radius:24px;padding:26px 22px;text-align:center;max-width:360px;width:100%;box-shadow:0 12px 0 #b98d00}
+.win-card h2{font:400 clamp(44px,14vw,64px)/1 Bungee,sans-serif;margin:0;color:var(--bg2)}
+.win-card p{font-weight:800;margin:10px 0 18px;font-size:17px}
+canvas#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:40}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
