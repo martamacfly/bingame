@@ -45,7 +45,7 @@ function build(code,size){
 function newCode(){let s='';for(let i=0;i<4;i++)s+=ALPH[Math.floor(Math.random()*ALPH.length)];return s}
 function startGame(code,size){
  S.size=size;S.code=code;S.cells=build(code,size);
- S.marks=S.cells.map(c=>c.c==='free');S.start=Date.now();S.lines=0;S.bingo=false;S.end=0;
+ S.marks=S.cells.map(c=>c.c==='free');S.start=Date.now();S.lines=0;S.lineSung=false;S.bingo=false;S.end=0;
  save();render();
 }
 function linesDone(){
@@ -87,7 +87,8 @@ grid.addEventListener('click',e=>{
  const all=S.marks.every(Boolean);
  if(all&&!S.bingo){S.bingo=true;S.end=Date.now();save();render();showWin();return}
  if(!all&&S.bingo){S.bingo=false;S.end=0}
- if(now>before)toast(now===1?'¡Línea!':'¡'+now+' líneas!');
+ // La línea se canta una sola vez por cartón: la primera. Después, solo queda el bingo.
+ if(now>before&&!S.lineSung){S.lineSung=true;toast('¡Línea!')}
  save();render();
 });
 function showWin(){
@@ -184,6 +185,7 @@ function confetti(){
 load();
 delete S.useCustom; // versión anterior: casillas mezcladas con un check
 if(S.mode!=='mine')S.mode='serie';
+if(S.lineSung===undefined)S.lineSung=S.lines>0; // partidas guardadas con la versión anterior
 const broken=!Array.isArray(S.cells)||!S.cells.length||!Array.isArray(S.marks)||S.marks.length!==S.cells.length;
 if(!fromLink()){
  if(broken){S.mode='serie';startGame(newCode(),[3,4,5].includes(S.size)?S.size:4)}
