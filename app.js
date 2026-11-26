@@ -11,7 +11,9 @@ comida:['Alguien con helado','Churrería','Alguien con barra de pan','Puesto de 
 raro:['Estatua humana','Alguien empujando un coche','Animal exótico de paseo','Alguien con loro o hurón','Coche lleno de globos','Algo de otra época']
 };
 const ALPH='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-const $=id=>document.getElementById(id);
+// Si falta algún elemento (p. ej. el navegador aún tiene un index.html de otra versión),
+// usamos uno de mentira en vez de romper el juego entero.
+const $=id=>document.getElementById(id)||document.createElement('textarea');
 const grid=$('grid');
 let S={size:4,mode:'serie',code:'',marks:[],cells:[],custom:'',start:0,lines:0,bingo:false,end:0};
 
@@ -182,7 +184,11 @@ function confetti(){
 load();
 delete S.useCustom; // versión anterior: casillas mezcladas con un check
 if(S.mode!=='mine')S.mode='serie';
-if(!fromLink()){if(!S.cells.length)startGame(newCode(),4);else render()}
+const broken=!Array.isArray(S.cells)||!S.cells.length||!Array.isArray(S.marks)||S.marks.length!==S.cells.length;
+if(!fromLink()){
+ if(broken){S.mode='serie';startGame(newCode(),[3,4,5].includes(S.size)?S.size:4)}
+ else{try{render()}catch(e){S.mode='serie';startGame(newCode(),4)}}
+}
 $('custom').value=S.custom;
 }
 

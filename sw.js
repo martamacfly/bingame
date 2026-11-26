@@ -1,11 +1,11 @@
 // Service worker: guarda la app para que funcione sin conexión.
 // Si cambias algún archivo, sube el número de versión para que los móviles lo actualicen.
-const CACHE = 'bingo-v2';
+const CACHE = 'bingo-v3';
 const ASSETS = [
   './',
   'index.html',
-  'styles.css',
-  'app.js',
+  'styles.css?v=3',
+  'app.js?v=3',
   'manifest.webmanifest',
   'icons/icon.svg',
   'icons/icon-180.png',
@@ -29,8 +29,11 @@ self.addEventListener('activate', e => {
 self.addEventListener('fetch', e => {
   if (e.request.method !== 'GET') return;
   // Red primero, caché si no hay conexión (incluye las fuentes de Google)
+  // Los archivos propios se piden saltándose la caché del navegador, para que
+  // nunca se mezclen archivos de versiones distintas.
+  const own = new URL(e.request.url).origin === location.origin;
   e.respondWith(
-    fetch(e.request)
+    fetch(e.request, own ? { cache: 'no-cache' } : undefined)
       .then(res => {
         if (res.ok || res.type === 'opaque') {
           const copy = res.clone();
