@@ -1,6 +1,6 @@
 // Service worker: guarda la app para que funcione sin conexión.
 // Si cambias algún archivo, sube el número de versión para que los móviles lo actualicen.
-const CACHE = 'bingo-v1';
+const CACHE = 'bingo-v2';
 const ASSETS = [
   './',
   'index.html',

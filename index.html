@@ -55,11 +55,14 @@
   <div class="seg" role="group" aria-label="Tamaño del cartón">
    <button data-size="3">3×3</button><button data-size="4">4×4</button><button data-size="5">5×5</button>
   </div>
+  <div class="seg" role="group" aria-label="Tipo de cartón">
+   <button data-mode="serie">De serie</button><button data-mode="mine">Personalizado</button>
+  </div>
   <button class="btn y" id="nuevo">Cartón nuevo</button>
  </div>
 
  <section class="ticket" aria-label="Tu cartón">
-  <div class="thead"><b>Cartón <span id="codeTop" style="color:var(--blue);font:inherit"></span></b><span id="clock">0:00</span></div>
+  <div class="thead"><b><span id="cardLabel">Cartón</span> <span id="codeTop" style="color:var(--blue);font:inherit"></span></b><span id="clock">0:00</span></div>
   <div class="grid" id="grid"></div>
  </section>
 
@@ -72,9 +75,9 @@
 
  <section class="panel">
   <h2>Jugar en pareja</h2>
-  <p>Este es el código de tu cartón. Si tu pareja lo mete en su móvil, tendréis el mismo cartón y será una carrera. Si preferís cartones distintos, que cada uno pulse «Cartón nuevo».</p>
+  <p>Mándale el enlace a tu pareja y tendréis el mismo cartón: será una carrera. Si es un cartón personalizado, el enlace lleva tus casillas dentro. Si preferís cartones distintos, que cada uno pulse «Cartón nuevo».</p>
   <div class="code" id="code">----</div>
-  <div class="row"><button class="btn" id="copy">Copiar código</button></div>
+  <div class="row"><button class="btn" id="link">Compartir enlace</button><button class="btn ghost" id="copy">Copiar código</button></div>
   <div class="row" style="margin-top:12px">
    <input id="join" maxlength="6" placeholder="Código, p. ej. KQ7M-4" aria-label="Código de partida" autocomplete="off">
    <button class="btn ghost" id="joinBtn">Usar código</button>
@@ -82,12 +85,13 @@
   <p class="msg" id="msg"></p>
  </section>
 
- <section class="panel">
-  <h2>Tus propias casillas</h2>
-  <p>Añade cosas de tu barrio o bromas vuestras, una por línea. Se mezclan con las de serie.</p>
-  <textarea id="custom" placeholder="Vecino del 3º regando&#10;Alguien con camiseta del Córdoba&#10;Burro o caballo"></textarea>
-  <label class="chk"><input type="checkbox" id="useCustom"> Incluir mis casillas en los cartones</label>
-  <p style="font-size:14px;margin:0">Para compartir código, los dos tenéis que tener las mismas casillas propias (o ninguna).</p>
+ <section class="panel" id="customPanel">
+  <h2>Cartón personalizado</h2>
+  <p>Escribe tus propias casillas, una por línea: cosas de tu barrio, bromas vuestras… Todas salen en tu cartón, y si no llegas a llenarlo se completa con casillas de serie.</p>
+  <textarea id="custom" aria-label="Tus casillas, una por línea" placeholder="Vecino del 3º regando&#10;Alguien con camiseta del Córdoba&#10;Burro o caballo"></textarea>
+  <p class="hint" id="customInfo"></p>
+  <div class="row"><button class="btn" id="makeCustom">Crear mi cartón</button></div>
+  <p class="msg" id="customMsg"></p>
  </section>
 
  <section class="panel">
