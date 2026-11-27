@@ -13,6 +13,14 @@ Juego de bingo para jugar paseando por la calle. Es una web estática (HTML + CS
 | `sw.js` | Service worker: guarda la app para usarla sin internet |
 | `icons/` | Iconos de la app |
 
+## Bingo de la cena de Navidad
+
+En la carpeta `navidad/` hay otra versión, con su propio estilo, para jugar entre primos en la cena de Navidad: las casillas son frases de la familia y cosas que pasan en la mesa. Se abre en `/navidad/` y también se puede instalar como app.
+
+- Todos usan el mismo **código de mesa**, y cada primo, al poner su nombre, recibe un cartón distinto.
+- En «Frases de vuestra familia» se pueden añadir vuestros clásicos; viajan dentro del enlace al compartirlo.
+- Al cambiar algo, sube la versión en `navidad/sw.js` (`bingo-navidad-v1` → `-v2`) y el `?v=` de `navidad/index.html`.
+
 ## Probar en tu ordenador
 
 ```powershell
