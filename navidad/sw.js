@@ -1,11 +1,11 @@
 // Service worker del bingo de Navidad: guarda la app para que funcione sin conexión.
 // Si cambias algún archivo, sube el número de versión para que los móviles lo actualicen.
-const CACHE = 'bingo-navidad-v1';
+const CACHE = 'bingo-navidad-v2';
 const ASSETS = [
   './',
   'index.html',
-  'styles.css?v=1',
-  'app.js?v=1',
+  'styles.css?v=2',
+  'app.js?v=2',
   'manifest.webmanifest',
   'icons/icon.svg',
   'icons/icon-180.png',

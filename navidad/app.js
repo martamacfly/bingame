@@ -2,7 +2,7 @@
 const CAT={dice:'#b3202a',comida:'#b45309',mesa:'#7e22ce',tele:'#0369a1',familia:'#15803d',lio:'#c2410c',sofa:'#475569',tradicion:'#a16207',mio:'#be185d'};
 const BASE={
 // Lo que dice algún familiar
-dice:['«¿Y tú para cuándo novio/a?»','«¡Cómo has crecido!»','«Estás más delgado/a»','«Come, que no has comido nada»','«En mis tiempos…»','«¿Y los estudios qué tal?»',
+dice:['«¿Y tú para cuándo novio/a?»','«¡Cómo has crecido!»','«Estás más delgado/a»','«Estás más gordo/a»','«¿Para cuándo la boda?»','«¿Para cuándo el niño?»','«Ni machismo ni feminismo»','«Come, que no has comido nada»','«En mis tiempos…»','«¿Y los estudios qué tal?»',
  '«Este año no compramos tanto»','«Yo turrón no quiero» (y come)','«Esto antes no pasaba»','«¿Quién quiere más?»','«Llévate un táper»','«Apaga la tele, que estamos comiendo»',
  '«Qué rico está todo»','«Hay comida para un regimiento»','«El año que viene lo hacemos en tu casa»','«Ya no hay Navidades como las de antes»','«¿Y el trabajo, bien?»','«Tu primo ya se ha comprado un piso»'],
 // Lo que pasa con la comida
