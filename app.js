@@ -71,6 +71,8 @@ function render(){
  const tot=S.marks.length,mk=S.marks.filter(Boolean).length;
  $('sMarks').textContent=mk+'/'+tot;$('sLines').textContent=done.length;$('sLeft').textContent=tot-mk;
  $('meter').style.width=(mk/tot*100)+'%';
+ // «Limpiar cartón» solo aparece cuando hay algo tachado
+ $('limpiar').hidden=!S.marks.some((x,i)=>x&&S.cells[i].c!=='free');
  tick();
 }
 function esc(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
@@ -135,6 +137,17 @@ function showWin(){
 }
 $('close').onclick=()=>$('winOv').classList.remove('show');
 $('again').onclick=()=>{$('winOv').classList.remove('show');startGame(newCode(),S.size)};
+// Limpiar: mismo cartón y misma partida, pero sin tachar y con el reloj a cero.
+// Pide un segundo toque para no borrarlo sin querer.
+let clearT;
+$('limpiar').onclick=()=>{
+ const b=$('limpiar');
+ if(!b.dataset.sure){b.dataset.sure='1';b.textContent='¿Seguro? Toca otra vez';clearTimeout(clearT);clearT=setTimeout(resetClear,3000);return}
+ resetClear();
+ S.marks=S.cells.map(c=>c.c==='free');S.start=Date.now();S.lines=0;S.lineSung=false;S.bingo=false;S.end=0;
+ save();render();toast('Cartón limpio');
+};
+function resetClear(){const b=$('limpiar');delete b.dataset.sure;b.textContent='Limpiar cartón';clearTimeout(clearT)}
 $('nuevo').onclick=()=>{startGame(newCode(),S.size);$('msg').textContent='Partida nueva: si jugáis juntos, comparte el enlace otra vez.'};
 document.querySelectorAll('[data-size]').forEach(b=>b.onclick=()=>startGame(S.code||newCode(),+b.dataset.size));
 document.querySelectorAll('[data-type]').forEach(b=>b.onclick=()=>setType(b.dataset.type));

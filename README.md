@@ -45,7 +45,7 @@ Tiene que servirse por **HTTPS** (todas las anteriores lo hacen) para que se pue
 
 ## Al hacer cambios
 
-Sube el número de versión en `sw.js` (`bingo-v5` → `bingo-v6`) y el `?v=` de `index.html` para que los móviles que ya la tienen instalada descarguen la nueva versión.
+Sube el número de versión en `sw.js` (`bingo-v6` → `bingo-v7`) y el `?v=` de `index.html` para que los móviles que ya la tienen instalada descarguen la nueva versión.
 
 ## ¿Y en Google Play / App Store?
 
