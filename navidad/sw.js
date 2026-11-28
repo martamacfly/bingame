@@ -1,44 +1,12 @@
-// Service worker del bingo de Navidad: guarda la app para que funcione sin conexión.
-// Si cambias algún archivo, sube el número de versión para que los móviles lo actualicen.
-const CACHE = 'bingo-navidad-v2';
-const ASSETS = [
-  './',
-  'index.html',
-  'styles.css?v=2',
-  'app.js?v=2',
-  'manifest.webmanifest',
-  'icons/icon.svg',
-  'icons/icon-180.png',
-  'icons/icon-192.png',
-  'icons/icon-512.png',
-  'icons/icon-512-maskable.png'
-];
-
-self.addEventListener('install', e => {
-  e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)).then(() => self.skipWaiting()));
-});
-
+// El bingo de Navidad ya no vive aquí: este service worker borra su caché y se da de baja,
+// para que los móviles que lo instalaron pasen a la app principal.
+self.addEventListener('install', () => self.skipWaiting());
 self.addEventListener('activate', e => {
-  // Solo borra cachés antiguas de esta app, no las del bingo callejero
-  e.waitUntil(
-    caches.keys()
-      .then(keys => Promise.all(keys.filter(k => k.startsWith('bingo-navidad-') && k !== CACHE).map(k => caches.delete(k))))
-      .then(() => self.clients.claim())
-  );
-});
-
-self.addEventListener('fetch', e => {
-  if (e.request.method !== 'GET') return;
-  const own = new URL(e.request.url).origin === location.origin;
-  e.respondWith(
-    fetch(e.request, own ? { cache: 'no-cache' } : undefined)
-      .then(res => {
-        if (res.ok || res.type === 'opaque') {
-          const copy = res.clone();
-          caches.open(CACHE).then(c => c.put(e.request, copy));
-        }
-        return res;
-      })
-      .catch(() => caches.match(e.request, { ignoreSearch: true }))
-  );
+  e.waitUntil((async () => {
+    const keys = await caches.keys();
+    await Promise.all(keys.filter(k => k.startsWith('bingo-navidad-')).map(k => caches.delete(k)));
+    await self.registration.unregister();
+    const clients = await self.clients.matchAll({ type: 'window' });
+    clients.forEach(c => c.navigate(c.url));
+  })());
 });

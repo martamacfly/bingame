@@ -1,7 +1,7 @@
 {
-  "name": "Bingo callejero",
+  "name": "Bingo",
   "short_name": "Bingo",
-  "description": "Sal a pasear, busca lo que pone tu cartón y táchalo. ¡Gana quien cante bingo primero!",
+  "description": "Bingos para jugar con los tuyos: por la calle, en la cena de Navidad, en el coche o en la playa.",
   "lang": "es",
   "start_url": "./",
   "scope": "./",

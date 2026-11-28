@@ -1,6 +1,6 @@
-# Bingo callejero
+# Bingo
 
-Juego de bingo para jugar paseando por la calle. Es una web estática (HTML + CSS + JS, sin dependencias) y además una **PWA**: se puede instalar en el móvil como si fuera una app y funciona sin conexión.
+Juego de bingo para jugar con los tuyos. Al abrirlo eliges el juego: **callejero**, **cena de Navidad**, **viaje en coche** o **playa**. Cada uno tiene su estilo y sus casillas. Es una web estática (HTML + CSS + JS, sin dependencias) y además una **PWA**: se puede instalar en el móvil como si fuera una app y funciona sin conexión.
 
 ## Archivos
 
@@ -9,17 +9,16 @@ Juego de bingo para jugar paseando por la calle. Es una web estática (HTML + CS
 | `index.html` | La página |
 | `styles.css` | Los estilos |
 | `app.js` | La lógica del juego |
+| `modes.js` | Los juegos: textos, categorías y casillas |
 | `manifest.webmanifest` | Nombre, colores e iconos de la app instalable |
 | `sw.js` | Service worker: guarda la app para usarla sin internet |
 | `icons/` | Iconos de la app |
 
-## Bingo de la cena de Navidad
+## Juegos
 
-En la carpeta `navidad/` hay otra versión, con su propio estilo, para jugar entre primos en la cena de Navidad: las casillas son frases de la familia y cosas que pasan en la mesa. Se abre en `/navidad/` y también se puede instalar como app.
-
-- Todos usan el mismo **código de mesa**, y cada primo, al poner su nombre, recibe un cartón distinto.
-- En «Frases de vuestra familia» se pueden añadir vuestros clásicos; viajan dentro del enlace al compartirlo.
-- Al cambiar algo, sube la versión en `navidad/sw.js` (`bingo-navidad-v1` → `-v2`) y el `?v=` de `navidad/index.html`.
+- Las casillas y los textos de cada juego están en `modes.js`. Para añadir uno nuevo, copia un bloque, cámbiale la clave y dale estilo en `styles.css` con `[data-mode=clave]`.
+- Al compartir, el enlace lleva el juego y la partida. Sin nombre, todos tienen el mismo cartón (carrera); si cada uno pone su nombre, cada uno tiene un cartón distinto.
+- La antigua dirección `/navidad/` redirige al juego de Navidad.
 
 ## Probar en tu ordenador
 
@@ -46,7 +45,7 @@ Tiene que servirse por **HTTPS** (todas las anteriores lo hacen) para que se pue
 
 ## Al hacer cambios
 
-Sube el número de versión en `sw.js` (`bingo-v1` → `bingo-v2`) para que los móviles que ya la tienen instalada descarguen la nueva versión.
+Sube el número de versión en `sw.js` (`bingo-v5` → `bingo-v6`) y el `?v=` de `index.html` para que los móviles que ya la tienen instalada descarguen la nueva versión.
 
 ## ¿Y en Google Play / App Store?
 
